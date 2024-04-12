@@ -53,6 +53,7 @@ This project follows a typical NestJS structure with additional directories for 
 - **languages:** Directory for language files.
 - **app:** Main application directory.
 
+```bash
 src/
 │
 ├── common/ # Common modules used throughout the application
@@ -77,3 +78,4 @@ src/
 ├── languages/ # Directory for language files
 │
 └── app/ # Main application directory
+```
