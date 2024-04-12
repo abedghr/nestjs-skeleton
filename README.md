@@ -9,8 +9,6 @@ This project is a NestJS template with common modules and a user module.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
