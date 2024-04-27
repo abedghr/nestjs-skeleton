@@ -12,7 +12,7 @@ import { UserNotFoundGuard } from '../guards/user.not-found.guard';
 import { UserActiveGuard } from '../guards/user.active.guard';
 import { USER_ACTIVE_META_KEY } from '../constants/user.constant';
 
-export const GetLoggedInUser = createParamDecorator(
+export const GetViewer = createParamDecorator(
   (returnPlain: boolean, ctx: ExecutionContext): UserDoc | UserEntity => {
     const { __user } = ctx
       .switchToHttp()

@@ -14,7 +14,7 @@ export function AuthJwtAccessProtected(): MethodDecorator {
 export function AuthJwtAdminAccessProtected(): MethodDecorator {
     return applyDecorators(
         UseGuards(AuthJwtAccessGuard, RolePayloadTypeGuard),
-        SetMetadata(ROLE_TYPE_META_KEY, [ENUM_ROLE_TYPE.ADMIN])
+        SetMetadata(ROLE_TYPE_META_KEY, [ENUM_ROLE_TYPE.SUPER_ADMIN, ENUM_ROLE_TYPE.ADMIN])
     );
 }
 

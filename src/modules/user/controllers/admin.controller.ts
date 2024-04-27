@@ -30,7 +30,7 @@ import {
 import { UserDoc, UserEntity } from '../repositories/entities/user.entity';
 import { UserService } from '../services/user.service';
 import { AuthService } from 'src/common/auth/services/auth.service';
-import { GetLoggedInUser, UserProtected } from '../decorators/user.decorator';
+import { GetViewer, UserProtected } from '../decorators/user.decorator';
 import { AuthJwtAdminAccessProtected } from 'src/common/auth/decorators/auth.jwt.decorator';
 import { UserUpdateDto } from '../dtos/user.update.dto';
 import { UserDeleteDto } from '../dtos/user.delete.dto';
@@ -71,7 +71,7 @@ export class AdminController {
   @AuthJwtAdminAccessProtected()
   @Post('/')
   async create(
-    @GetLoggedInUser() viewer: UserDoc,
+    @GetViewer() viewer: UserDoc,
     @Body() body: UserCreateDto,
   ): Promise<IResponse> {
     const passwordWithSalt = await this.authService.createPassword(
@@ -97,7 +97,7 @@ export class AdminController {
   @AuthJwtAdminAccessProtected()
   @Put('/:user')
   async update(
-    @GetLoggedInUser() viewer: UserDoc,
+    @GetViewer() viewer: UserDoc,
     @Param('user') user: string,
     @Body() body: UserUpdateDto,
   ): Promise<IResponse> {
@@ -125,7 +125,7 @@ export class AdminController {
   @AuthJwtAdminAccessProtected()
   @Delete('/:user')
   async delete(
-    @GetLoggedInUser() viewer: UserDoc,
+    @GetViewer() viewer: UserDoc,
     @Param('user') user: string,
     @Body() body: UserDeleteDto,
   ): Promise<IResponse> {
@@ -195,7 +195,7 @@ export class AdminController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Post(':user/upload-image')
   async uploadCover(
-      @GetLoggedInUser() viewer: UserDoc,
+      @GetViewer() viewer: UserDoc,
       @Param('user') user: string,
       @UploadedFile(FileRequiredPipe, FileSizeImagePipe, FileTypeImagePipe)
       file: IFile

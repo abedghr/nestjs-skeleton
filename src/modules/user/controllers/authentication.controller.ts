@@ -10,7 +10,7 @@ import { UserDoc } from '../repositories/entities/user.entity';
 import { UserRegisterDto } from '../dtos/user.register.dto';
 import { UserGetSerialization } from '../serializations/user.get.serialization';
 import { AuthJwtAccessProtected, AuthJwtRefreshProtected } from 'src/common/auth/decorators/auth.jwt.decorator';
-import { GetLoggedInUser, UserAuthProtected, UserProtected } from '../decorators/user.decorator';
+import { GetViewer, UserAuthProtected, UserProtected } from '../decorators/user.decorator';
 import { UserPayloadSerialization } from '../serializations/user.payload.serialization';
 
 @ApiTags('Auth')
@@ -41,7 +41,7 @@ export class AuthenticationController {
   @HttpCode(HttpStatus.OK)
   @Post('/refresh-token')
   async refresh(
-      @GetLoggedInUser() viewer: UserDoc
+      @GetViewer() viewer: UserDoc
   ): Promise<IResponse> {
       return {
         data: await this.authService.refreshToken(viewer)
@@ -70,7 +70,7 @@ export class AuthenticationController {
   @UserProtected()
   @AuthJwtAccessProtected()
   @Get('/profile')
-  async profile(@GetLoggedInUser() viewer: UserDoc): Promise<IResponse> {
+  async profile(@GetViewer() viewer: UserDoc): Promise<IResponse> {
     return {
       data: viewer,
     };
