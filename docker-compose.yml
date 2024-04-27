@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app
+    expose:
+      - ${HTTP_PORT}
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+    networks:
+      - app-network
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - mongo1
+      - mongo2
+      - mongo3
+    # restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  mongo1:
+    image: mongo
+    hostname: mongo1
+    container_name: mongo1
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+    volumes:
+      - mongodbdata1:/data/db
+    entrypoint: ["mongod", "--replSet", "appReplicaSet", "--bind_ip", "localhost,mongo1"]
+    restart: unless-stopped
+  mongo2:
+    image: mongo
+    hostname: mongo2
+    container_name: mongo2
+    ports:
+      - 27018:27017
+    networks:
+      - app-network
+    volumes:
+      - mongodbdata2:/data/db
+    entrypoint: ["mongod", "--replSet", "appReplicaSet", "--bind_ip", "localhost,mongo2"]
+    restart: unless-stopped
+  mongo3:
+    image: mongo
+    hostname: mongo3
+    container_name: mongo3
+    ports:
+      - 27019:27017
+    networks:
+      - app-network
+    volumes:
+      - mongodbdata3:/data/db
+    entrypoint: ["mongod", "--replSet", "appReplicaSet", "--bind_ip", "localhost,mongo3"]
+    restart: unless-stopped
+  mongosetup:
+    image: mongo
+    networks:
+      - app-network
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    volumes:
+      - .:/scripts
+    restart: "no"
+    entrypoint: [ "bash", "/scripts/mongo_setup.sh"]
+
+volumes:
+  mongodbdata1:
+  mongodbdata2:
+  mongodbdata3:
+
+networks:
+  app-network:
+    external: true

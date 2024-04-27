@@ -2,11 +2,12 @@ import { NestApplication, NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app/app.module';
 import { useContainer } from 'class-validator';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import swaggerInit from './swagger';
 
 
 async function bootstrap() {
+  const logger = new Logger();
   const app: NestApplication = await NestFactory.create(AppModule, {
     snapshot: true,
   });
@@ -39,6 +40,10 @@ async function bootstrap() {
   // Global Pipe
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   
+  logger.log(`==========================================================`);
+  logger.log(`App will serve on ${host}:${port}`, 'NestApplication');
+  logger.log(`==========================================================`);
+
   // Listen
   await app.listen(port, host);
 }
