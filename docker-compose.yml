@@ -19,7 +19,7 @@ services:
       - mongo1
       - mongo2
       - mongo3
-    # restart: unless-stopped
+    restart: unless-stopped
 
   redis:
     image: redis:latest
