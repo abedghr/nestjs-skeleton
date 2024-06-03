@@ -622,7 +622,7 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
         return repository.save(options);
     }
 
-    async raw<RawResponse, RawQuery = PipelineStage[]>(
+    async aggregate<RawResponse, RawQuery = PipelineStage[]>(
         rawOperation: RawQuery,
         options?: IDatabaseRawOptions
     ): Promise<RawResponse[]> {

@@ -120,7 +120,7 @@ export abstract class DatabaseBaseRepositoryAbstract<Entity> {
         options?: IDatabaseManyOptions<any>
     ): Promise<boolean>;
 
-    abstract raw<RawResponse, RawQuery = any>(
+    abstract aggregate<RawResponse, RawQuery = any>(
         rawOperation: RawQuery,
         options?: IDatabaseRawOptions
     ): Promise<RawResponse[]>;

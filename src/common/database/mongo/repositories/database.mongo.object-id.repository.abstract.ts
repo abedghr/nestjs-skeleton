@@ -73,6 +73,14 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
             findAll.session(options.session);
         }
 
+        if (options?.readFromSecondary) {
+            findAll.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findAll.allowDiskUse(true);
+        }
+
         return findAll.lean() as any;
     }
 
@@ -111,6 +119,14 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
             findAll.session(options.session);
         }
 
+        if (options?.readFromSecondary) {
+            findAll.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findAll.allowDiskUse(true);
+        }
+
         return findAll.lean() as any;
     }
 
@@ -142,6 +158,14 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
 
         if (options?.order) {
             findOne.sort(options.order);
+        }
+
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
         }
 
         return findOne.exec() as any;
@@ -216,6 +240,15 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
 
         if (options?.order) {
             findOne.sort(options.order);
+        }
+
+
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
         }
 
         return findOne.exec() as T;
@@ -634,7 +667,7 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
     }
 
     
-    async raw<RawResponse, RawQuery = PipelineStage[]>(
+    async aggregate<RawResponse, RawQuery = PipelineStage[]>(
         rawOperation: RawQuery,
         options?: IDatabaseRawOptions
     ): Promise<RawResponse[]> {
@@ -656,6 +689,14 @@ export abstract class DatabaseMongoObjectIdRepositoryAbstract<
 
         if (options?.session) {
             aggregate.session(options?.session);
+        }
+
+        if (options?.readFromSecondary) {
+            aggregate.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            aggregate.allowDiskUse(true);
         }
 
         return aggregate;

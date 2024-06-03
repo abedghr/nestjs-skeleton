@@ -8,16 +8,18 @@ export interface IDatabaseFindOneOptions<T = any>
     join?: boolean | PopulateOptions | PopulateOptions[];
     session?: T;
     withDeleted?: boolean;
+    readFromSecondary?: boolean;
+    allowDiskUse?: boolean;
 }
 
 export type IDatabaseGetTotalOptions<T = any> = Pick<
     IDatabaseFindOneOptions<T>,
-    'session' | 'withDeleted' | 'join'
+    'session' | 'withDeleted' | 'join' | 'readFromSecondary' | 'allowDiskUse'
 >;
 
 export type IDatabaseSaveOptions<T = any> = Pick<
     IDatabaseFindOneOptions<T>,
-    'session'
+    'session' | 'readFromSecondary' | 'allowDiskUse'
 >;
 
 // find
@@ -38,7 +40,7 @@ export interface IDatabaseCreateOptions<T = any>
 export interface IDatabaseExistOptions<T = any>
     extends Pick<
         IDatabaseFindOneOptions<T>,
-        'session' | 'withDeleted' | 'join'
+        'session' | 'withDeleted' | 'join' | 'readFromSecondary' | 'allowDiskUse'
     > {
     excludeId?: string[];
 }
@@ -46,7 +48,7 @@ export interface IDatabaseExistOptions<T = any>
 // bulk
 export type IDatabaseManyOptions<T = any> = Pick<
     IDatabaseFindOneOptions<T>,
-    'session' | 'join'
+    'session' | 'join' | 'readFromSecondary' | 'allowDiskUse'
 >;
 
 export type IDatabaseCreateManyOptions<T = any> = Pick<
@@ -60,5 +62,5 @@ export type IDatabaseRestoreManyOptions<T = any> = IDatabaseManyOptions<T>;
 
 export type IDatabaseRawOptions<T = any> = Pick<
     IDatabaseFindOneOptions<T>,
-    'session' | 'withDeleted' | 'order'
+    'session' | 'withDeleted' | 'order' | 'readFromSecondary' | 'allowDiskUse'
 >;
