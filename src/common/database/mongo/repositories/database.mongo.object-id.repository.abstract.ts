@@ -18,7 +18,7 @@ import {
     IDatabaseRestoreManyOptions,
     IDatabaseRawOptions,
     IDatabaseSaveOptions,
-} from 'src/common/database/interfaces/database.interface';
+} from 'src/common/database/mongo/interfaces/database.interface';
 import { DATABASE_IS_DELETED_FIELD_NAME } from '../constants/database.constant';
 import { DatabaseBaseRepositoryAbstract } from '../database.base-repository.abstract';
 

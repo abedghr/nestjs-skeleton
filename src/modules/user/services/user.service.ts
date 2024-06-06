@@ -8,7 +8,7 @@ import { UserRepository } from '../repositories/repositories/user.repository';
 import {
   IDatabaseCreateOptions,
   IDatabaseFindOneOptions,
-} from 'src/common/database/interfaces/database.interface';
+} from 'src/common/database/mongo/interfaces/database.interface';
 import { UserDoc, UserEntity } from '../repositories/entities/user.entity';
 import { UserRegisterDto } from '../dtos/user.register.dto';
 import { IAuthPassword } from 'src/common/auth/interfaces/auth.interface';

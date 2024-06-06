@@ -17,7 +17,7 @@ import {
     IDatabaseRestoreManyOptions,
     IDatabaseRawOptions,
     IDatabaseSaveOptions,
-} from 'src/common/database/interfaces/database.interface';
+} from 'src/common/database/mongo/interfaces/database.interface';
 import { DATABASE_DELETED_AT_FIELD_NAME, DATABASE_IS_DELETED_FIELD_NAME } from '../constants/database.constant';
 import { DatabaseBaseRepositoryAbstract } from '../database.base-repository.abstract';
 import { ENUM_PAGINATION_ORDER_DIRECTION_NUMBER_FORMAT_TYPE, ENUM_PAGINATION_ORDER_DIRECTION_TYPE } from 'src/common/pagination/constants/pagination.enum.constant';
@@ -73,6 +73,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
             findAll.session(options.session);
         }
 
+        if (options?.readFromSecondary) {
+            findAll.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findAll.allowDiskUse(true);
+        }
+
         return findAll.lean() as any;
     }
 
@@ -114,6 +122,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
             findAll.session(options.session);
         }
 
+        if (options?.readFromSecondary) {
+            findAll.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findAll.allowDiskUse(true);
+        }
+
         return findAll.lean() as any;
     }
     async findOne<T = EntityDocument>(
@@ -144,6 +160,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
 
         if (options?.order) {
             findOne.sort(options.order);
+        }
+
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
         }
 
         return findOne.exec() as any;
@@ -177,6 +201,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
 
         if (options?.order) {
             findOne.sort(options.order);
+        }
+
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
         }
 
         return findOne.exec() as any;
@@ -218,6 +250,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
             findOne.sort(options.order);
         }
 
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
+        }
+
         return findOne.exec() as any;
     }
 
@@ -255,6 +295,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
 
         if (options?.order) {
             findOne.sort(options.order);
+        }
+
+        if (options?.readFromSecondary) {
+            findOne.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            findOne.allowDiskUse(true);
         }
 
         return findOne.exec() as any;
@@ -660,6 +708,14 @@ export abstract class DatabaseMongoUUIDRepositoryAbstract<
 
         if (options?.session) {
             aggregate.session(options?.session);
+        }
+
+        if (options?.readFromSecondary) {
+            aggregate.read('secondary');
+        }
+        
+        if (options?.allowDiskUse) {
+            aggregate.allowDiskUse(true);
         }
 
         return aggregate;

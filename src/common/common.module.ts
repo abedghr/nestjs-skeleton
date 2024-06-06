@@ -6,7 +6,7 @@ import configs from './configs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DATABASE_CONNECTION_NAME } from './database/mongo/constants/database.constant';
 import { DatabaseOptionsModule } from './database/database.options.module';
-import { DatabaseOptionsService } from './database/services/database.options.service';
+import { DatabaseOptionsService } from './database/mongo/services/database.options.service';
 import { FileModule } from './file/file.module';
 import { HelperModule } from './helper/helper.module';
 import { PaginationModule } from './pagination/pagination.module';
@@ -15,6 +15,8 @@ import { ResponseModule } from './response/response.module';
 import { MessageModule } from './message/message.module';
 import { ErrorModule } from './error/error.module';
 import { DebuggerModule } from './debugger/debugger.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseSQLOptionsService } from './database/sql/services/database-sql.options.service';
 
 @Module({
     controllers: [],
@@ -37,6 +39,12 @@ import { DebuggerModule } from './debugger/debugger.module';
             inject: [DatabaseOptionsService],
             useFactory: (databaseOptionsService: DatabaseOptionsService) =>
                 databaseOptionsService.createOptions(),
+        }),
+        TypeOrmModule.forRootAsync({
+            imports: [DatabaseOptionsModule],
+            inject: [DatabaseSQLOptionsService],
+            useFactory: (databaseSQLOptionsService: DatabaseSQLOptionsService) =>
+                databaseSQLOptionsService.createOptions(),
         }),
         AuthModule,
         AwsModule,

@@ -10,7 +10,7 @@ import {
     IDatabaseRawOptions,
     IDatabaseGetTotalOptions,
     IDatabaseSaveOptions,
-} from 'src/common/database/interfaces/database.interface';
+} from 'src/common/database/mongo/interfaces/database.interface';
 
 export abstract class DatabaseBaseRepositoryAbstract<Entity> {
     abstract findAll<T = Entity>(

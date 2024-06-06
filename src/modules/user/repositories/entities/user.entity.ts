@@ -2,7 +2,7 @@ import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { ENUM_ROLE_TYPE } from 'src/common/auth/constants/auth.role.enum.constant';
 import { AwsS3Serialization } from 'src/common/aws/serializations/aws.s3.serialization';
-import { DatabaseEntity } from 'src/common/database/decorators/database.decorator';
+import { DatabaseEntity } from 'src/common/database/mongo/decorators/database.decorator';
 import { DatabaseMongoObjectIdEntityAbstract } from 'src/common/database/mongo/database.mongo.object-id.entity.abstract';
 import { USER_GENDER } from 'src/modules/user/constants/user.enum.constants';
 

@@ -1,5 +1,5 @@
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
-import { DatabaseEntity } from 'src/common/database/decorators/database.decorator';
+import { DatabaseEntity } from 'src/common/database/mongo/decorators/database.decorator';
 import { GEO_LOCATION_TYPE } from '../constants/database.enum.constants';
 import { DatabaseMongoObjectIdEntityAbstract } from '../database.mongo.object-id.entity.abstract';
 import { IDatabaseLocationField } from '../interfaces/database.mongo.interface';
