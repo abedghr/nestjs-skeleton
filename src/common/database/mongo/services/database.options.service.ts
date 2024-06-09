@@ -28,7 +28,7 @@ export class DatabaseOptionsService implements IDatabaseOptionsService {
       uri = `${uri}/${database}${options}`;
     }
 
-    if (env !== ENUM_APP_ENVIRONMENT.PRODUCTION) {
+    if (env !== ENUM_APP_ENVIRONMENT.PRODUCTION && this.configService.get('debugger.logLevels').includes('debug')) {
       mongoose.set('debug', debug);
     }
 

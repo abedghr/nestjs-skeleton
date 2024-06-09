@@ -18,5 +18,6 @@ export default registerAs(
             maxFiles: '7d',
             maxSize: '2m',
         },
+        logLevels: process.env.LOG_LEVELS ? process.env.LOG_LEVELS.split(',') : 'error,warn,info,debug'.split(',')
     })
 );
