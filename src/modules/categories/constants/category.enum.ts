@@ -1,0 +1,10 @@
+export enum ENUM_CATEGORY_STATUS {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+    DELETED = 'DELETED',
+}
+
+export enum ENUM_HOME_CATEGORY_STATUS {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+}

@@ -1,0 +1,47 @@
+export enum ENUM_POLICY_ACTION {
+    MANAGE = 'manage',
+    READ = 'read',
+    CREATE = 'create',
+    UPDATE = 'update',
+    DELETE = 'delete',
+    EXPORT = 'export',
+    IMPORT = 'import',
+}
+
+export enum ENUM_POLICY_REQUEST_ACTION {
+    MANAGE,
+    READ,
+    CREATE,
+    UPDATE,
+    DELETE,
+    EXPORT,
+    IMPORT,
+}
+
+export enum ENUM_POLICY_SUBJECT {
+    ALL = 'ALL',
+    AUTH = 'AUTH',
+    SETTING = 'SETTING',
+    COUNTRY = 'COUNTRY',
+    ROLE = 'ROLE',
+    USER = 'USER',
+    BANNER = 'BANNER',
+    CATEGORY = 'CATEGORY',
+    NOTIFICATION = 'NOTIFICATION',
+}
+
+export enum ENUM_POLICY_PROVIDER_SUBJECT {
+    ALL = 'ALL',
+}
+
+export enum ENUM_POLICY_ROLE_TYPE {
+    SUPER_ADMIN = 'SUPER_ADMIN',
+    PROVIDER = 'PROVIDER',
+    CUSTOMER = 'CUSTOMER',
+}
+
+export enum ENUM_LOGIN_SOURCE {
+    DASHBOARD = 'DASHBOARD',
+    PROVIDER_APP = 'PROVIDER_APP',
+    CUSTOMER_APP = 'CUSTOMER_APP',
+}

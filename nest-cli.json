@@ -1,0 +1,25 @@
+{
+    "collection": "@nestjs/schematics",
+    "sourceRoot": "src",
+    "compilerOptions": {
+        "plugins": ["@nestjs/swagger"],
+        "assets": [
+            {
+                "include": "languages/**/*",
+                "outDir": "dist/src"
+            },
+            {
+                "include": "secrets",
+                "outDir": "dist/src"
+            },
+            {
+                "include": "modules/email/templates/*.pug",
+                "outDir": "dist/src",
+                "watchAssets": true
+            }
+        ],
+        "webpack": false,
+        "deleteOutDir": true,
+        "watchAssets": true
+    }
+}

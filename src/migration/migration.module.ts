@@ -1,0 +1,37 @@
+import { Module } from '@nestjs/common';
+import { CommandModule } from 'nestjs-command';
+import { CommonModule } from 'src/common/common.module';
+import { MigrationCountrySeed } from 'src/migration/seeds/migration.country.seed';
+import { MigrationEmailSeed } from 'src/migration/seeds/migration.email.seed';
+import { MigrationRoleSeed } from 'src/migration/seeds/migration.role.seed';
+import { MigrationSettingSeed } from 'src/migration/seeds/migration.settings.seed';
+import { MigrationUserSeed } from 'src/migration/seeds/migration.user.seed';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { BannerModule } from 'src/modules/banner/banner.module';
+import { CountryModule } from 'src/modules/country/country.module';
+import { EmailModule } from 'src/modules/email/email.module';
+import { RoleModule } from 'src/modules/role/role.module';
+import { SettingModule } from 'src/modules/setting/setting.module';
+import { UserModule } from 'src/modules/user/user.module';
+@Module({
+    imports: [
+        CommonModule,
+        CommandModule,
+        CountryModule,
+        BannerModule,
+        EmailModule,
+        AuthModule,
+        RoleModule,
+        UserModule,
+        SettingModule,
+    ],
+    providers: [
+        MigrationCountrySeed,
+        MigrationEmailSeed,
+        MigrationUserSeed,
+        MigrationRoleSeed,
+        MigrationSettingSeed,
+    ],
+    exports: [],
+})
+export class MigrationModule {}

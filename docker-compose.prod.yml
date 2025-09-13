@@ -1,0 +1,21 @@
+version: "3.8"
+name: glow-app-backend-prod
+
+services:
+  service:
+    build:
+      context: .
+      dockerfile: dockerfile.prod
+    container_name: service
+    hostname: service
+    ports:
+      - 443:443
+    env_file:
+      - docker.env
+    restart: always
+    networks:
+      - glow-app-network
+
+networks:
+  glow-app-network:
+    driver: bridge
