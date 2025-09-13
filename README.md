@@ -1,12 +1,12 @@
-# NestJS Glow App Backend
+# NestJS Skeleton
 
 ## Description
 
-This project is a NestJS template with common modules and a user module.
+This project is a NestJS template with common modules
 
 ## Table of Contents
 
-- [NestJS Glow App Backend](#nestjs-glow-app-backend)
+- [NestJS Skeleton](#nestjs-skeleton)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
@@ -45,39 +45,49 @@ $ yarn run start:prod
 
 ### Overview
 
-This project follows a typical NestJS structure with additional directories for common modules, user modules, languages, and the main application.
+This project follows a typical NestJS structure with additional directories for common modules, user and business requirements modules, languages, and the main application.
 
 
 ### Directories
 
-- **common:** Contains common modules used throughout the application.
-- **modules:** Contains user-specific modules.
-- **languages:** Directory for language files.
 - **app:** Main application directory.
+- **common:** Contains common modules used throughout the application.
+- **modules:** Contains business logic required modules.
+- **languages:** Directory for language files.
+- **configs:** Directory for configuration files.
+- **migrations:** Directory for migrations files.
+- **router:** Directory for routes.
+- **worker:** Directory for workers and jobs.
 
 ```bash
+ci/
+│
 src/
 │
+├── app/ # Common modules used throughout the application
 ├── common/ # Common modules used throughout the application
-│ ├── auth/
-│ ├── aws/
-│ ├── configs/
 │ ├── database/
-│ ├── debugger/
 │ ├── doc/
-│ ├── error/
 │ ├── file/
 │ ├── helper/
 │ ├── message/
 │ ├── pagination/
+│ ├── redis/
 │ ├── request/
 │ ├── response/
 │ └── common.module.ts
 │
-├── modules/ # User Specific modules.
-│ └── user/
+├── configs/
+├── languages/
+├── migrations/
+├── modules/
+│ ├── auth/
+│ ├── aws/
+│ ├── configs/
+│ ├── policy/
+│ ├── role/
+│ ├── role/
 │
-├── languages/ # Directory for language files
-│
-└── app/ # Main application directory
+├── router/
+├── worker/
 ```
