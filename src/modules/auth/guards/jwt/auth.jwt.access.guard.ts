@@ -12,7 +12,7 @@ import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class AuthJwtAccessGuard extends AuthGuard('jwtAccess') {
-    handleRequest<TUser = any>(err: Error, user: TUser, info: Error): TUser {
+    handleRequest<TUser = AuthJwtAccessPayloadDto>(err: Error, user: TUser, info: Error): TUser {
         if (err || !user) {
             throw new UnauthorizedException({
                 statusCode: HttpStatus.UNAUTHORIZED,
@@ -62,17 +62,7 @@ export class AuthAdminJwtAccessGuard extends AuthGuard('jwtAccess') {
 
         // Check shop ownership if owner protection is enabled
         if (providerProtected && user.type === ENUM_POLICY_ROLE_TYPE.PROVIDER) {
-            const salonId =
-                request.params.salon ||
-                request.body.salon ||
-                request.query.salon;
-
-            if (salonId) {
-                throw new UnauthorizedException({
-                    statusCode: HttpStatus.UNAUTHORIZED,
-                    message: 'auth.error.accessTokenUnauthorized',
-                });
-            }
+            // TODO: need to check the id related to the provider to know that the user is the owner.
 
             const userId =
                 request.params.user || request.body.user || request.query.user;
@@ -116,18 +106,34 @@ export class AuthCustomerJwtAccessGuard extends AuthGuard('jwtAccess') {
 
 @Injectable()
 export class JwtCustomerOptionalAccessGuard extends AuthGuard('jwtAccess') {
-    handleRequest(err, user) {
-        if (err || !user) {
-            return null;
-        }
-        if (user.type !== ENUM_POLICY_ROLE_TYPE.CUSTOMER) {
+    async canActivate(context: ExecutionContext): Promise<boolean> {
+        const canActivate = await super.canActivate(context);
+        if (!canActivate) return false;
+
+        const request = context.switchToHttp().getRequest();
+        const user: AuthJwtAccessPayloadDto = request.user;
+
+        if (user != null && user.type !== ENUM_POLICY_ROLE_TYPE.CUSTOMER) {
             throw new UnauthorizedException({
                 statusCode: HttpStatus.UNAUTHORIZED,
                 message: 'auth.error.accessTokenUnauthorized',
             });
         }
-        return user;
+
+        return true;
     }
+    // handleRequest(err, user) {
+    //     if (err || !user) {
+    //         return null;
+    //     }
+    //     if (user.type !== ENUM_POLICY_ROLE_TYPE.CUSTOMER) {
+    //         throw new UnauthorizedException({
+    //             statusCode: HttpStatus.UNAUTHORIZED,
+    //             message: 'auth.error.accessTokenUnauthorized',
+    //         });
+    //     }
+    //     return user;
+    // }
 }
 
 @Injectable()
